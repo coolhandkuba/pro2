@@ -6,6 +6,5 @@ CREATE TABLE recipes (
 	id int NOT NULL AUTO_INCREMENT,
 	recipe_name VARCHAR(200) NOT NULL,
 	recipe VARCHAR(5000) NOT NULL,
-	date TIMESTAMP,
 	PRIMARY KEY (id)
 );
