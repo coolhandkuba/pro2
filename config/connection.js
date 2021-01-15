@@ -1,11 +1,6 @@
 // Set up MySQL connection.
-<<<<<<< HEAD
 var mysql = require("mysql");
 var connection;
-=======
-const mysql = require("mysql");
-const connection;
->>>>>>> c8e0dc411a924f8b0e0708e5887421240b132c04
 
 
 // if (process.env.JAWSDB_URL) {
