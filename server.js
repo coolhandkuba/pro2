@@ -12,13 +12,6 @@ const db = require("./models");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Set Handlebars.
-// var exphbs = require("express-handlebars");
-
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
 app.use(express.static("public"));
 // We need to use sessions to keep track of our user's login status
 app.use(
@@ -30,6 +23,41 @@ app.use(passport.session());
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+require("./routes/api-order-routes.js")(app);
+require("./routes/api-size-routes.js")(app);
+require("./routes/api-status-routes.js")(app);
+require("./routes/api-topping-routes.js")(app);
+
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
+
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//Requiring and setting express-handlebars
+const handlebars = require("express-handlebars");
+
+app.set("view engine", "handlebars");
+app.engine(
+  "handlebars",
+  handlebars({
+    defaultLayout: "main"
+  })
+);
+const hbs = handlebars.create({});
+
+hbs.handlebars.registerHelper("isEqual1", val1 => {
+  return val1 === 1;
+});
+
+hbs.handlebars.registerHelper("isEqual2", val2 => {
+  return val2 === 2;
+});
+
+hbs.handlebars.registerHelper("isEqual", (val1, val2) => {
+  return val1 === val2;
+});
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
